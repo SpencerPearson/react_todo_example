@@ -1,4 +1,5 @@
 .App {
+  position: relative;
   min-height: 83vh;
   margin-bottom: 0 !important;
   text-align: center;
@@ -7,4 +8,10 @@
 .navbar-brand svg {
   font-size: 2.5em;
   margin-left: .5em;
+}
+
+.footerContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
