@@ -5,8 +5,8 @@ import { GoChecklist } from 'react-icons/go'
 
 export default function Navigation() {
   return (
-    <Navbar expand='md' variant='dark' bg='dark' className='p-3'> 
-        <Navbar.Brand href='/'><GoChecklist /> &emsp;ReactJS ToDo</Navbar.Brand>
+    <Navbar expand='lg' variant='dark' bg='dark' className='p-3'> 
+        <Navbar.Brand href='/'><GoChecklist /><span className="brand-text"> ReactJS ToDo</span></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
             <Nav>

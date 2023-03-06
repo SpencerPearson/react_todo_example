@@ -10,7 +10,7 @@ export default function Footer() {
         {currentUser &&
             <Logout />
         }
-        <footer className="text-center text-white bg-info p-4">
+        <footer className="text-center text-white bg-purple p-4">
             <strong>&copy; {new Date().getFullYear()} Spencer Pearson. All Rights Reserved.</strong>
         </footer>
     </div>

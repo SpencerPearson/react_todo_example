@@ -15,7 +15,7 @@ export default function Login() {
 
   return (
     <div className="login">
-      <article className="bg-info mb-5 p-5 text-dark">
+      <article className="bg-purple mb-5 p-5 text-dark">
         <h1 className="text-center">Welcome to ReactJS ToDo!</h1>
       </article>
       <Container>

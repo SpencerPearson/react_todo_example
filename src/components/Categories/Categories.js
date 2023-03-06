@@ -3,6 +3,8 @@ import { Container, Table } from 'react-bootstrap'
 import axios from 'axios'
 import SingleCategory from './SingleCategory'
 import './Categories.css'
+import { useAuth } from '../../contexts/AuthContext'
+import CatCreate from './CatCreate'
 
 export default function Categories() {
   const [categories, setCategories] = useState([])
@@ -14,15 +16,32 @@ export default function Categories() {
     })
   }
 
+  const { currentUser } = useAuth()
+
+  const [showCreate, setShowCreate] = useState(false)
+
   useEffect(() => {
     getCategories()
   }, [])
 
   return (
     <section className="categories">
-      <article className="bg-info p-4 mb-4">
+      <article className="bg-purple p-4 mb-4">
         <h1 className='text-center'>ReactJS ToDo Dashboard</h1>
       </article>
+
+      {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
+        <div className="p-2 mb-3 text-center">
+          {showCreate ? 
+            <>
+              <button onClick={() => setShowCreate(false)} className="btn btn-danger p-3 mb-3">Cancel</button>
+              <CatCreate getCategories={getCategories} setShowCreate={setShowCreate} />
+            </>
+            : <button onClick={() => setShowCreate(true)} className="btn btn-success p-3">Create Category</button>            
+          }
+        </div>
+      }
+
       <Container className='pt-4'>
         <Table striped bordered hover variant='dark'>
           <thead>

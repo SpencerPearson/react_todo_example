@@ -4,10 +4,14 @@ import { Container, Table } from 'react-bootstrap'
 import SingleToDo from './SingleToDo'
 import './ToDos.css'
 import FilterCat from './FilterCat'
+import { useAuth } from '../../contexts/AuthContext'
+import ToDoCreate from './ToDoCreate'
 
 export default function ToDos() {
   const [toDos, setToDos] = useState([])
 
+  const { currentUser } = useAuth()
+  const [showCreate, setShowCreate] = useState();
 
   const [filter, setFilter] = useState(0)
   const [showDone, setShowDone] = useState(false)
@@ -25,9 +29,26 @@ export default function ToDos() {
 
   return (
     <section className="todos">
-      <article className="bg-info p-4 mb-4">
+      <article className="bg-purple p-4 mb-4">
         <h1 className='text-center'>ReactJS ToDo Dashboard</h1>
       </article>
+      {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
+        <div className="p-2 mb-3 text-center">
+          {!showCreate ?
+            <button className="btn btn-success p-3 mb-3" onClick={() => setShowCreate(true)}>
+              Create New Task
+            </button> :
+            <button className="btn btn-danger p-3 mb-3" onClick={() => setShowCreate(false)}>
+              Close Form
+          </button>
+          }
+          {showCreate &&
+            <div className="createContainer w-75 m-auto">
+                <ToDoCreate getToDos={getToDos} setshowCreate={setShowCreate} />
+            </div>
+          }
+        </div>
+      }
       <FilterCat setFilter={setFilter} showDone={showDone} setShowDone={setShowDone} />
       <Container className='pt-4'>
         <Table striped bordered hover variant='dark'>
