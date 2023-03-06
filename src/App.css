@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
 .App {
   position: relative;
   min-height: 83vh;
@@ -8,6 +10,22 @@
 .navbar-brand svg {
   font-size: 2.5em;
   margin-left: .5em;
+  position: relative;
+  top: -10px;
+}
+
+.brand-text {
+  font-family: 'Irish Grover', cursive;
+  font-size: 2.5em;
+  padding: 0;
+}
+
+.nav-link {
+  font-size: 1.25em;
+}
+
+.bg-purple {
+  background-color: #691DA3;
 }
 
 .footerContainer {
