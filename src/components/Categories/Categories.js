@@ -48,6 +48,9 @@ export default function Categories() {
             <tr>
               <th>Category Name</th>
               <th>Description</th>
+              {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
+                <th>Actions</th>
+              }
             </tr>
           </thead>
           <tbody>

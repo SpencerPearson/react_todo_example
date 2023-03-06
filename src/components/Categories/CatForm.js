@@ -14,6 +14,18 @@ export default function CatForm(props) {
                 props.getCategories()
             })
         }
+        else{
+            const catToEdit = {
+                categoryId: props.category.categoryId,
+                catName: values.catName,
+                catDesc: values.catDesc
+            }
+
+            axios.put(`https://localhost:7258/api/Categories/${props.category.categoryId}`, catToEdit).then(() => {
+                props.setShowEdit(false)
+                props.getCategories()
+            })
+        }
     }
 
   return (
