@@ -57,6 +57,9 @@ export default function ToDos() {
               <th>Done?</th>
               <th>Task</th>
               <th>Category</th>
+              {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
+                <th>Actions</th>
+              }
             </tr>
           </thead>
           <tbody>

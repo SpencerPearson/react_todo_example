@@ -12,7 +12,7 @@ export default function ToDoForm(props) {
 
     const handleSubmit = (values) => {
         console.log(values)
-        if (!props.resource) {
+        if (!props.todo) {
             const newToDo = {
                 name: values.name,
                 done: false,
@@ -22,6 +22,19 @@ export default function ToDoForm(props) {
             axios.post(`https://localhost:7258/api/ToDos`, newToDo).then(() => {
                 props.getToDos()
                 props.setShowCreate(false)
+            })
+        }
+        else {
+            const taskToEdit = {
+                toDoId: props.todo.toDoId,
+                name: values.name,
+                done: props.todo.done,
+                categoryId: values.categoryId
+            }
+
+            axios.put(`https://localhost:7258/api/ToDos/${props.todo.toDoId}`, taskToEdit).then(() => {
+                props.getToDos()
+                props.setShowEdit(false)
             })
         }
     }
