@@ -28,8 +28,15 @@
   background-color: #691DA3;
 }
 
+#editLink:hover, #editLink:focus {
+  background-color: #ffc107;
+}
+
+#deleteLink:hover, #editLink:focus {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 .footerContainer {
-  position: absolute;
   width: 100%;
-  bottom: 0;
 }

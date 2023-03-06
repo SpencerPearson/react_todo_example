@@ -9,7 +9,6 @@ export default function SingleToDo(props) {
 
     const { currentUser } = useAuth()
 
-
     const flipDone = () => {
         let updatedToDo = {
             toDoId: props.todo.toDoId,
@@ -23,15 +22,25 @@ export default function SingleToDo(props) {
         })
     }
 
+    const deleteToDo = (id) => {
+        if(window.confirm(`Are you sure you want to delete ${props.todo.name}?`)) {
+            axios.delete(`https://localhost:7258/api/ToDos/${id}`).then(() => {props.getToDos()})
+        }
+    }
+
   return (
     <tr>
         <td><input type='checkbox' checked={props.todo.done} onChange={() => flipDone()} /></td>
         <td>{props.todo.name}</td>
         <td>{props.todo.category.catName}</td>
         {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
-            <td>
-                <button className="m1 rounded" id='editLink' onClick={() => setShowEdit(true)}>
+            <td className='text-center'>
+                <button className="fs-5 rounded" id='editLink' onClick={() => setShowEdit(true)}>
                     <FaEdit />
+                </button>
+                &emsp;
+                <button className='fs-5 rounded' id='deleteLink' onClick={() => deleteToDo(props.todo.toDoId)}>
+                    <FaTrashAlt />
                 </button>
                 {showEdit &&
                     <ToDoEdit

@@ -83,24 +83,24 @@ export default function ToDos() {
             }
           </tbody>
         </Table>
-        {!showDone ?
-        <>
-        {filter !== 0 && toDos.filter(x => x.done === false && x.categoryId === filter).length === 0 &&
-          <h2 className="alert alert-warning text-dark">
-            There are no incomplete To Do items in this category.
-          </h2>
-        }
-        </> :
-        <>
-          {filter !== 0 && toDos.filter(x => x.categoryId === filter).length === 0 &&
-          <h2 className="alert alert-warning text-dark">
-            There are no To Do items in this category.
-          </h2>
-        }
-        </>
+            {!showDone ?
+            <>
+            {filter !== 0 && toDos.filter(x => x.done === false && x.categoryId === filter).length === 0 &&
+              <h2 className="alert alert-warning text-dark">
+                There are no incomplete To Do items in this category.
+              </h2>
+            }
+            </> :
+            <>
+              {filter !== 0 && toDos.filter(x => x.categoryId === filter).length === 0 &&
+              <h2 className="alert alert-warning text-dark">
+                There are no To Do items in this category.
+              </h2>
+            }
+            </>
 
-        }
-        </Container>
+            }
+      </Container>
         
     </section>
   )

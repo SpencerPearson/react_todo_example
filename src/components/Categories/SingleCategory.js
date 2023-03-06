@@ -9,14 +9,24 @@ export default function SingleToDo(props) {
 
   const { currentUser } = useAuth()
 
+  const deleteCat = (id) => {
+    if(window.confirm(`Are you sure you want to delete ${props.category.catName}?`)) {
+      axios.delete(`https://localhost:7258/api/Categories/${id}`).then(() => props.getCategories())
+    }
+  }
+
   return (
     <tr>
         <td>{props.category.catName}</td>
         <td>{!props.category.catDesc ? 'No description provided' : props.category.catDesc}</td>
         {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
           <td>
-            <button className="m-1 rounded" id='editLink' onClick={() => setShowEdit(true)}>
+            <button className="fs-5 rounded" id='editLink' onClick={() => setShowEdit(true)}>
               <FaEdit />
+            </button>
+            &emsp;
+            <button className="fs-5 rounded" id='deleteLink' onClick={() => deleteCat(props.category.categoryId)}>
+              <FaTrashAlt />
             </button>
             {showEdit &&
               <CatEdit
