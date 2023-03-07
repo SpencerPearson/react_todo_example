@@ -29,7 +29,7 @@ export default function ToDos() {
 
   return (
     <section className="todos">
-      <article className="bg-purple p-4 mb-4">
+      <article className="bg-purple p-4 mb-4 text-white">
         <h1 className='text-center'>ReactJS ToDo Dashboard</h1>
       </article>
       {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&

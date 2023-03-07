@@ -14,7 +14,7 @@ export default function Login() {
   }
 
   return (
-    <div className="login">
+    <section className="login">
       <article className="bg-purple mb-5 p-5 text-dark">
         <h1 className="text-center">Welcome to ReactJS ToDo!</h1>
       </article>
@@ -30,6 +30,6 @@ export default function Login() {
           </Card.Body>
         </Card>
       </Container>
-    </div>
+    </section>
   )
 }

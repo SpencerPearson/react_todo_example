@@ -28,6 +28,23 @@
   background-color: #691DA3;
 }
 
+section.notFound,
+section.about,
+section.todos, 
+section.categories,
+section.login {
+  min-height: 85vh;
+  background-image: url('./images/todo-bg.jpg');
+}
+
+/* section.notFound img,
+section.about img,
+section.todos img, 
+section.categories img,
+section.login img {
+
+} */
+
 #editLink:hover, #editLink:focus {
   background-color: #ffc107;
 }
