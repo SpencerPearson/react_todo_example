@@ -30,7 +30,9 @@ export default function SingleToDo(props) {
 
   return (
     <tr>
-        <td><input type='checkbox' checked={props.todo.done} onChange={() => flipDone()} /></td>
+        <td>
+            <input className='checkbox' type='checkbox' checked={props.todo.done} onChange={() => flipDone()} />
+        </td>
         <td>{props.todo.name}</td>
         <td>{props.todo.category.catName}</td>
         {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
