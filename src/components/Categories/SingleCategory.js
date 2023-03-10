@@ -11,7 +11,7 @@ export default function SingleToDo(props) {
 
   const deleteCat = (id) => {
     if(window.confirm(`Are you sure you want to delete ${props.category.catName}?`)) {
-      axios.delete(`https://localhost:7258/api/Categories/${id}`).then(() => props.getCategories())
+      axios.delete(`http://todoapi.spencerwpearson.com/api/Categories/${id}`).then(() => props.getCategories())
     }
   }
 

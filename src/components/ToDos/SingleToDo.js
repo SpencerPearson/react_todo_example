@@ -16,7 +16,7 @@ export default function SingleToDo(props) {
             done: !props.todo.done,
             categoryId: props.todo.categoryId
         }
-        axios.put(`https://localhost:7258/api/ToDos/${props.todo.toDoId}`, updatedToDo).then(response => {
+        axios.put(`http://todoapi.spencerwpearson.com/api/ToDos/${props.todo.toDoId}`, updatedToDo).then(response => {
             console.log(response)
             props.getToDos()
         })
@@ -24,7 +24,7 @@ export default function SingleToDo(props) {
 
     const deleteToDo = (id) => {
         if(window.confirm(`Are you sure you want to delete ${props.todo.name}?`)) {
-            axios.delete(`https://localhost:7258/api/ToDos/${id}`).then(() => {props.getToDos()})
+            axios.delete(`http://todoapi.spencerwpearson.com/api/ToDos/${id}`).then(() => {props.getToDos()})
         }
     }
 

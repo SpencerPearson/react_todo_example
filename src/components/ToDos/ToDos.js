@@ -17,7 +17,7 @@ export default function ToDos() {
   const [showDone, setShowDone] = useState(false)
 
   const getToDos = () => {
-    axios.get(`https://localhost:7258/api/ToDos`).then(response => {
+    axios.get(`http://todoapi.spencerwpearson.com/api/ToDos`).then(response => {
       console.log(response)
       setToDos(response.data)
     })
