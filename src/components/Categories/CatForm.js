@@ -3,27 +3,29 @@ import { Formik, Field, Form } from 'formik'
 import { catSchema } from '../../utilities/validationSchema'
 import axios from 'axios'
 
-export default function CatForm(props) {
+export default function CatForm({ category = '', setShowCreate, getCategories, setShowEdit }) {
+    const { categoryId, catName, catDesc } = category || ''
+
     const handleSubmit = (values) => {
         console.log(values)
-        if (!props.category) {
+        if (!category) {
             const catToCreate = values
 
             axios.post(`http://todoapi.spencerwpearson.com/api/Categories`, catToCreate).then(() => {
-                props.setShowCreate(false)
-                props.getCategories()
+                setShowCreate(false)
+                getCategories()
             })
         }
         else{
             const catToEdit = {
-                categoryId: props.category.categoryId,
+                categoryId: categoryId,
                 catName: values.catName,
                 catDesc: values.catDesc
             }
 
-            axios.put(`http://todoapi.spencerwpearson.com/api/Categories/${props.category.categoryId}`, catToEdit).then(() => {
-                props.setShowEdit(false)
-                props.getCategories()
+            axios.put(`http://todoapi.spencerwpearson.com/api/Categories/${categoryId}`, catToEdit).then(() => {
+                setShowEdit(false)
+                getCategories()
             })
         }
     }
@@ -32,8 +34,8 @@ export default function CatForm(props) {
     <div className='createCategory m-2 text-white text-center'>
         <Formik
             initialValues={{
-                catName: props.category ? props.category.catName : '',
-                catDesc: props.category ? props.category.catDesc : ''
+                catName: category ? catName : '',
+                catDesc: category ? catDesc : ''
             }}
             validationSchema={catSchema}
             onSubmit={(values) => handleSubmit(values)}>

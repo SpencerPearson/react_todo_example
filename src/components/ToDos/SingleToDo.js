@@ -4,50 +4,52 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import { useAuth } from '../../contexts/AuthContext'
 import ToDoEdit from './ToDoEdit'
 
-export default function SingleToDo(props) {
+export default function SingleToDo({ todo, getToDos }) {
+    const { toDoId, name, done, category, categoryId } = todo
+
     const [showEdit, setShowEdit] = useState(false)
 
     const { currentUser } = useAuth()
 
     const flipDone = () => {
         let updatedToDo = {
-            toDoId: props.todo.toDoId,
-            name: props.todo.name,
-            done: !props.todo.done,
-            categoryId: props.todo.categoryId
+            toDoId: toDoId,
+            name: name,
+            done: !done,
+            categoryId: categoryId
         }
-        axios.put(`http://todoapi.spencerwpearson.com/api/ToDos/${props.todo.toDoId}`, updatedToDo).then(response => {
+        axios.put(`http://todoapi.spencerwpearson.com/api/ToDos/${toDoId}`, updatedToDo).then(response => {
             console.log(response)
-            props.getToDos()
+            getToDos()
         })
     }
 
     const deleteToDo = (id) => {
-        if(window.confirm(`Are you sure you want to delete ${props.todo.name}?`)) {
-            axios.delete(`http://todoapi.spencerwpearson.com/api/ToDos/${id}`).then(() => {props.getToDos()})
+        if(window.confirm(`Are you sure you want to delete ${name}?`)) {
+            axios.delete(`http://todoapi.spencerwpearson.com/api/ToDos/${id}`).then(() => {getToDos()})
         }
     }
 
   return (
     <tr>
         <td>
-            <input className='checkbox' type='checkbox' checked={props.todo.done} onChange={() => flipDone()} />
+            <input className='checkbox' type='checkbox' checked={done} onChange={() => flipDone()} />
         </td>
-        <td>{props.todo.name}</td>
-        <td>{props.todo.category.catName}</td>
+        <td>{name}</td>
+        <td>{category.catName}</td>
         {currentUser.email === process.env.REACT_APP_ADMIN_EMAIL &&
             <td className='text-center'>
                 <button className="fs-5 rounded" id='editLink' onClick={() => setShowEdit(true)}>
                     <FaEdit />
                 </button>
                 &emsp;
-                <button className='fs-5 rounded' id='deleteLink' onClick={() => deleteToDo(props.todo.toDoId)}>
+                <button className='fs-5 rounded' id='deleteLink' onClick={() => deleteToDo(toDoId)}>
                     <FaTrashAlt />
                 </button>
                 {showEdit &&
                     <ToDoEdit
-                        todo={props.todo}
-                        getToDos={props.getToDos}
+                        todo={todo}
+                        getToDos={getToDos}
                         showEdit={showEdit}
                         setShowEdit={setShowEdit} />
                 }

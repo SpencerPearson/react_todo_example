@@ -2,20 +2,21 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import CatForm from './CatForm'
 
-export default function CatEdit(props) {
+export default function CatEdit({ category, showEdit, setShowEdit, getCategories }) {
+  const { catName } = category
   return (
     <Modal
-        show={props.showEdit}
-        onHide={() => props.setShowEdit(false)}
+        show={showEdit}
+        onHide={() => setShowEdit(false)}
         size='lg'>
             <Modal.Header closeButton>
-                <h2>Editing {props.category.catName}</h2>
+                <h2>Editing {catName}</h2>
             </Modal.Header>
             <Modal.Body>
                 <CatForm
-                    getCategories={props.getCategories}
-                    setShowEdit={props.setShowEdit}
-                    category={props.category} />
+                    getCategories={getCategories}
+                    setShowEdit={setShowEdit}
+                    category={category} />
             </Modal.Body>
 
     </Modal>

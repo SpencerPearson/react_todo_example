@@ -3,7 +3,10 @@ import { Formik, Field, Form } from 'formik'
 import { toDoSchema } from '../../utilities/validationSchema'
 import axios from 'axios'
 
-export default function ToDoForm(props) {
+export default function ToDoForm({ todo = '', getToDos, setShowCreate, setShowEdit }) {
+    const { toDoId, name, done, categoryId } = todo || ''
+    
+
     const [categories, setCategories] = useState([])
 
     const getCategories = () => {
@@ -12,7 +15,7 @@ export default function ToDoForm(props) {
 
     const handleSubmit = (values) => {
         console.log(values)
-        if (!props.todo) {
+        if (!todo) {
             const newToDo = {
                 name: values.name,
                 done: false,
@@ -20,21 +23,21 @@ export default function ToDoForm(props) {
             }
 
             axios.post(`http://todoapi.spencerwpearson.com/api/ToDos`, newToDo).then(() => {
-                props.getToDos()
-                props.setShowCreate(false)
+                getToDos()
+                setShowCreate(false)
             })
         }
         else {
             const taskToEdit = {
-                toDoId: props.todo.toDoId,
+                toDoId: toDoId,
                 name: values.name,
-                done: props.todo.done,
+                done: done,
                 categoryId: values.categoryId
             }
 
-            axios.put(`http://todoapi.spencerwpearson.com/api/ToDos/${props.todo.toDoId}`, taskToEdit).then(() => {
-                props.getToDos()
-                props.setShowEdit(false)
+            axios.put(`http://todoapi.spencerwpearson.com/api/ToDos/${toDoId}`, taskToEdit).then(() => {
+                getToDos()
+                setShowEdit(false)
             })
         }
     }
@@ -46,9 +49,9 @@ export default function ToDoForm(props) {
   return (
     <Formik
         initialValues={{
-            name: props.todo ? props.todo.name : '',
-            done: props.todo ? props.todo.done : false,
-            categoryId: props.todo ? props.todo.categoryId : ''
+            name: todo ? name : '',
+            done: todo ? done : false,
+            categoryId: todo ? categoryId : ''
         }}
         validationSchema={toDoSchema}
         onSubmit={(values) => handleSubmit(values)}>
