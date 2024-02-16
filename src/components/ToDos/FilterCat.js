@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ImEye, ImEyeBlocked } from 'react-icons/im'
 
-export default function FilterCat(props) {
+export default function FilterCat({ setFilter, showDone, setShowDone }) {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
@@ -14,20 +14,20 @@ export default function FilterCat(props) {
 
   return (
     <div className='text-center mt-5'>
-        <button className="btn btn-outline-success bg-dark m-1" onClick={() => props.setFilter(0)}>
+        <button className="btn btn-outline-success bg-dark m-1" onClick={() => setFilter(0)}>
             All
         </button>
         {categories.map(cat => 
-            <button key={cat.categoryId} className="btn btn-outline-success bg-dark m-1" onClick={() => props.setFilter(Number(cat.categoryId))}>
+            <button key={cat.categoryId} className="btn btn-outline-success bg-dark m-1" onClick={() => setFilter(Number(cat.categoryId))}>
                 {cat.catName}
             </button>
         )}
         
-            {!props.showDone ?
-                <button className="btn btn-success m-1" onClick={() => props.setShowDone(!props.showDone)}>
+            {!showDone ?
+                <button className="btn btn-success m-1" onClick={() => setShowDone(true)}>
                     Show Complete &ensp;<ImEye />
                 </button>:
-                <button className="btn btn-warning m-1" onClick={() => props.setShowDone(!props.showDone)}>
+                <button className="btn btn-warning m-1" onClick={() => setShowDone(false)}>
                     Hide Complete &ensp;<ImEyeBlocked/> 
                 </button>
             }   
